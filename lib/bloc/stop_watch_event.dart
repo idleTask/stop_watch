@@ -10,6 +10,8 @@ abstract class StopWatchEvent extends Equatable {
 
 class Start extends StopWatchEvent {}
 
+class Resume extends StopWatchEvent {}
+
 class Pause extends StopWatchEvent {}
 
 class Tick extends StopWatchEvent {
