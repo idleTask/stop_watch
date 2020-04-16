@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:stop_watch/models/stop_watch_duration.dart';
 import '../stopwatch.dart';
 
 class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
@@ -42,7 +43,9 @@ class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
   Stream<StopWatchState> _mapStartToState(Start start) async* {
     yield Running(state.duration);
     _tickerSubscription =
-        _ticker.tick().listen((duration) => add(Tick(duration: duration)));
+        _ticker.tick().listen((duration) {
+          add(Tick(duration: duration+3500));
+        });
   }
 
   Stream<StopWatchState> _mapPauseToState(Pause pause) async* {
@@ -58,7 +61,7 @@ class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
   }
 
   Stream<StopWatchState> _mapTickToState(Tick tick) async* {
-    yield Running(tick.duration);
+    yield Running(StopWatchDuration(tick.duration));
   }
 
   Stream<StopWatchState> _mapResumeToState(Resume resume) async* {

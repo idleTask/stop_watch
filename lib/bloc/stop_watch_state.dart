@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:stop_watch/models/stop_watch_duration.dart';
 
 abstract class StopWatchState extends Equatable {
-  final int duration;
+  final StopWatchDuration duration;
 
   const StopWatchState(this.duration);
 
@@ -10,19 +11,19 @@ abstract class StopWatchState extends Equatable {
 }
 
 class Ready extends StopWatchState {
-  const Ready() : super(0);
+  const Ready() : super(const StopWatchDuration(0));
 }
 
 class Paused extends StopWatchState {
-  const Paused(int duration) : super(duration);
+  const Paused(StopWatchDuration duration) : super(duration);
 
   @override
-  String toString() => 'Paused { duration: $duration }';
+  String toString() => 'Paused { duration: ${duration.seconds} }';
 }
 
 class Running extends StopWatchState {
-  const Running(int duration) : super(duration);
+  const Running(StopWatchDuration duration) : super(duration);
 
   @override
-  String toString() => 'Running { duration: $duration }';
+  String toString() => 'Running { duration: ${duration.seconds} }';
 }
