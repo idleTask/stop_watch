@@ -44,7 +44,7 @@ class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
     yield Running(state.duration);
     _tickerSubscription =
         _ticker.tick().listen((duration) {
-          add(Tick(duration: duration+3500));
+          add(Tick(duration: duration));
         });
   }
 
