@@ -17,11 +17,11 @@ class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
   @override
   StopWatchState get initialState => const Ready();
 
-  @override
-  void onTransition(Transition<StopWatchEvent, StopWatchState> transition) {
-    super.onTransition(transition);
-    print(transition);
-  }
+//  @override
+//  void onTransition(Transition<StopWatchEvent, StopWatchState> transition) {
+//    super.onTransition(transition);
+//    print(transition);
+//  }
 
   @override
   Stream<StopWatchState> mapEventToState(
@@ -38,6 +38,12 @@ class StopWatchBloc extends Bloc<StopWatchEvent, StopWatchState> {
     } else if (event is Tick) {
       yield* _mapTickToState(event);
     }
+  }
+
+  @override
+  Future<void> close() {
+    _tickerSubscription?.cancel();
+    return super.close();
   }
 
   Stream<StopWatchState> _mapStartToState(Start start) async* {
